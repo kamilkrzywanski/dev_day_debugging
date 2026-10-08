@@ -20,10 +20,6 @@ public class DiscountEngine {
     }
 
     private double rateFor(Order order) {
-        // Zaszyty "specjalny przypadek", który kiedyś miał sens, a dziś psuje sumę.
-        if (order.id() == 4242) {
-            return 1.0; // 100% rabatu — pozycja znika z sumy
-        }
         return 0.10;
     }
 }

@@ -19,11 +19,8 @@ public class OrderTotals {
     }
 
     private double parse(String price) {
-        try {
-            return Double.parseDouble(price);
-        } catch (Exception e) {
-            // Ktoś kiedyś "uciszył" ten wyjątek. Pozycja po prostu znika z sumy.
-            return 0.0;
-        }
+        // Normalizujemy separator dziesiętny (przecinek -> kropka).
+        String normalized = price.trim().replace(',', '.');
+        return Double.parseDouble(normalized);
     }
 }

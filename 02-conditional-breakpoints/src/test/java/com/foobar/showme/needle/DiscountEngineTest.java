@@ -1,6 +1,5 @@
 package com.foobar.showme.needle;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ class DiscountEngineTest {
      * CEL: 10 000 zamówień po 100.0, rabat 10% → oczekiwana suma 900 000.0.
      * Jedno zamówienie psuje wynik. Znajdź je conditional breakpointem (HINTS.md).
      */
-    @Disabled("WARSZTAT: zdejmij po naprawie rateFor()")
     @Test
     void kazdeZamowienieMaRabat10Procent() {
         List<Order> orders = new ArrayList<>();

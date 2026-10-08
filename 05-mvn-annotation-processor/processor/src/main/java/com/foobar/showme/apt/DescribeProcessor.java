@@ -73,11 +73,7 @@ public class DescribeProcessor extends AbstractProcessor {
         }
     }
 
-    /**
-     * BŁĄD DO ZNALEZIENIA: zawsze zwraca "String", ignorując realny typ pola.
-     * Powinno zwracać {@code field.asType().toString()}.
-     */
     private String mapType(VariableElement field) {
-        return "String";
+        return field.asType().toString();
     }
 }

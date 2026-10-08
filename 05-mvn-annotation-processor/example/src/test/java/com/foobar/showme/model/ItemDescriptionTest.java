@@ -1,6 +1,5 @@
 package com.foobar.showme.model;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 class ItemDescriptionTest {
 
-    @Disabled("WARSZTAT: zdejmij po naprawie DescribeProcessor.mapType()")
     @Test
     void generujeRealneTypyPol() {
         assertEquals("int", ItemDescription.typeOf("id"));

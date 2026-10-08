@@ -8,6 +8,7 @@ WORKDIR /opt/app
 # Kopiujemy zbudowany artefakt. Wygląda niewinnie, prawda?
 # (Podpowiedź: sprawdź debuggerem, czy /config/app.properties jest na classpath.)
 COPY target/app.jar /opt/app/app.jar
+COPY config /opt/app/config
 
 # JDWP nasłuchuje na wszystkich interfejsach w KONTENERZE (nie na Twoim hoście!).
 # suspend=n → aplikacja startuje od razu, podpinasz się w dowolnym momencie.

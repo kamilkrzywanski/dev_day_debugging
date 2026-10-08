@@ -1,6 +1,5 @@
 package com.foobar.showme.silent;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -14,7 +13,6 @@ class OrderTotalsTest {
      * Zdejmij @Disabled, uruchom, zobacz błędną sumę, a potem znajdź przyczynę
      * debuggerem (patrz HINTS.md) — BEZ dodawania System.out.println.
      */
-    @Disabled("WARSZTAT: zdejmij po naprawie parse()")
     @Test
     void sumujeWszystkiePozycje() {
         OrderTotals totals = new OrderTotals();

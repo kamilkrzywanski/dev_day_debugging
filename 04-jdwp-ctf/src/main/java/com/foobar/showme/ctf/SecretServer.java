@@ -64,10 +64,6 @@ public class SecretServer {
     }
 
     static int add(int a, int b) {
-        // Zaszyty błąd: dla ujemnego b "optymalizacja", która daje zły wynik.
-        if (b < 0) {
-            return a - b; // miało być a + b
-        }
         return a + b;
     }
 
