@@ -1,0 +1,6 @@
+services:
+  price-app:
+    build: .
+    ports:
+      # host:container — port 5005 debuggera wystawiony na localhost hosta.
+      - "127.0.0.1:5005:5005"

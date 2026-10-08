@@ -1,0 +1,17 @@
+#cloud-config
+# DigitalOcean Droplet (Ubuntu 24.04) — stawia 30 instancji CTF (stacja 04).
+# UWAGA: podmień REPO_URL na adres swojego repo. Wklej całość w polu "user data".
+#
+# Model bezpieczny (domyślny): JDWP bindowany na 127.0.0.1, dostęp przez tunel SSH.
+# Firewall otwiera tylko SSH (22) i porty HTTP do /verify (8081-8110).
+# Portów debuggera NIE wystawiamy na świat — patrz deploy/README.md.
+package_update: true
+packages:
+  - git
+  - docker.io
+  - docker-compose-v2
+  - openjdk-21-jdk
+runcmd:
+  - systemctl enable --now docker
+  - bash -c 'git clone REPO_URL /opt/workshop && cd /opt/workshop && chmod +x mvnw && ./mvnw -q -pl 04-jdwp-ctf -am package && cd 04-jdwp-ctf && ./scale.sh 30 127.0.0.1 && docker compose -f compose.scale.yaml up --build -d'
+  - bash -c 'ufw allow 22/tcp && ufw allow 8081:8110/tcp && ufw --force enable'

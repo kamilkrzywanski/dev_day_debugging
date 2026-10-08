@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.foobar.showme</groupId>
+        <artifactId>05-mvn-annotation-processor</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <artifactId>describe-example</artifactId>
+
+    <dependencies>
+        <!-- Procesor + adnotacja. 'provided' = dostępne przy kompilacji, procesor
+             wykrywany automatycznie przez META-INF/services i uruchamiany przez javac. -->
+        <dependency>
+            <groupId>com.foobar.showme</groupId>
+            <artifactId>describe-processor</artifactId>
+            <version>1.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
