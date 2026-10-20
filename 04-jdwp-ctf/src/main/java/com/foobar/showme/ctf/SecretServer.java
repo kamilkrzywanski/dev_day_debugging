@@ -80,6 +80,7 @@ public class SecretServer {
 
     private static void respond(HttpExchange exchange, int status, String text) throws IOException {
         byte[] body = text.getBytes(StandardCharsets.UTF_8);
+        exchange.getResponseHeaders().set("Content-Type", "text/plain; charset=utf-8");
         exchange.sendResponseHeaders(status, body.length);
         try (OutputStream os = exchange.getResponseBody()) {
             os.write(body);
