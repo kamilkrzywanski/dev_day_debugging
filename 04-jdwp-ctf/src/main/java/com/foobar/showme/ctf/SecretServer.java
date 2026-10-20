@@ -25,7 +25,7 @@ public class SecretServer {
 
     // Sekret żyje w pamięci procesu — API go nie zwraca, ale debugger go zobaczy.
     private static final String FLAG =
-            System.getenv().getOrDefault("WORKSHOP_FLAG", "FLAG{jdwp-lokalny-przyklad}");
+            System.getenv().getOrDefault("WORKSHOP_FLAG", "FLAG-jdwp-lokalny-przyklad");
 
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
@@ -38,7 +38,7 @@ public class SecretServer {
 
     private static void index(HttpExchange exchange) throws IOException {
         // Przez HTTP wyciekają tylko gwiazdki. Prawdziwa flaga jest tylko w procesie.
-        String masked = "FLAG{" + "*".repeat(Math.max(0, FLAG.length() - 6)) + "}";
+        String masked = "FLAG-" + "*".repeat(Math.max(0, FLAG.length() - 5));
         String body = """
                 === Remote debug: 2 etapy ===
 

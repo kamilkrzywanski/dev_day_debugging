@@ -14,7 +14,7 @@ BIND=${2:-127.0.0.1}
     http=$((8080 + i))     # 8081..
     jdwp=$((5005 + i))     # 5006..
     rand=$(head -c6 /dev/urandom | od -An -tx1 | tr -d ' \n')
-    printf '  ctf-%s:\n    build: .\n    environment:\n      WORKSHOP_FLAG: "FLAG{%s-%s}"\n    ports:\n      - "0.0.0.0:%d:8080"\n      - "%s:%d:5005"\n' \
+    printf '  ctf-%s:\n    build: .\n    environment:\n      WORKSHOP_FLAG: "FLAG-%s-%s"\n    ports:\n      - "0.0.0.0:%d:8080"\n      - "%s:%d:5005"\n' \
       "$idx" "$rand" "$idx" "$http" "$BIND" "$jdwp"
   done
 } > compose.scale.yaml

