@@ -16,7 +16,9 @@ Uruchom `PriceApp` z *Working directory* ustawionym na katalog modułu `03-in-do
 ```bash
 mvn -q -pl 03-in-docker -am package
 cd 03-in-docker
-docker compose up --build
+docker compose up --build      # Docker
+# albo na Podmanie:
+podman compose up --build
 ```
 Logi pokażą `brutto=100.00` (VAT 0%).
 

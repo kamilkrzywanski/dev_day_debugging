@@ -17,6 +17,27 @@
 
 ## Checklist prowadzącego
 - [ ] `mvn clean install` przechodzi na maszynie prowadzącego i na kilku laptopach (Linux/Windows).
-- [ ] Docker działa; obraz `eclipse-temurin:21-jre` ściągnięty wcześniej (stacja 03).
+- [ ] Docker lub Podman działa; obraz `eclipse-temurin:21-jre` ściągnięty wcześniej (stacja 03).
 - [ ] Stacja 04: serwer(y) CTF postawione (patrz deploy/README.md), środowisko efemeryczne do wyrzucenia.
 - [ ] Rozwiązania pod ręką (poziom 3 w `ZADANIE.md`).
+
+## Wymagania techniczne (Docker lub Podman)
+Stacje 03 i 04 używają kontenerów. Wystarczy sam silnik — **Docker Desktop nie jest
+wymagany**. Działa Docker Engine + `docker compose` v2 albo Podman + `podman compose`.
+
+Smoke test przed warsztatem (silnik realnie uruchamia kontenery i obraz się ściąga —
+samo `--version` tego nie potwierdza):
+```bash
+# Docker
+docker run --rm hello-world
+docker pull eclipse-temurin:21-jre
+
+# Podman (odpowiednik; pełne nazwy omijają pytanie o rejestr)
+podman run --rm docker.io/library/hello-world
+podman pull docker.io/library/eclipse-temurin:21-jre
+```
+Uwagi dla Podmana:
+- W instrukcjach stacji 03 wpisuj `podman compose …` zamiast `docker compose …`
+  (albo doinstaluj `podman-docker`, wtedy `docker` działa jako alias).
+- Mac/Windows: najpierw `podman machine start` (na Linuksie niepotrzebne).
+- Port debuggera 5005 jest >1024, więc rootless Podman nie wymaga nic ekstra.
